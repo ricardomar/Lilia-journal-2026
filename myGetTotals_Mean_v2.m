@@ -1,19 +1,16 @@
-function [t, files] = myGetTotals_Mean_v2(files, msk)
+function [a, f] = myGetTotals_Mean_v2(files, msk)
 
 
 % Script adapted from Ged Ridgway's MATLAB script: http://www0.cs.ucl.ac.uk/staff/g.ridgway/vbm/get_totals.m
 
-% Returns the average voxel value within the binary mask "msk" for the images
-% listed in "files".
+% The script returns the average voxel value (`a`) within a binary mask (`msk`) for the image listed in `file`.
 
-% Example
-%[t1, files1] = myGetTotals_Mean('GM_map01_mni.nii', 'mask01_mni.nii');
-%[t2, files2] = myGetTotals_Mean('GM_map00_mni.nii', 'mask02_mni.nii');
-
-% [Currently, masking assumes that msk matches the voxel dimensions of each
-% image, and that therefore, all images have the same dimensions.]
+% The masking process assumes that the `msk` matches the voxel dimensions of each image; therefore, the image and mask must share the same dimensions.
 
 
+% Example usage
+%[a01, f01] = myGetTotals_Mean('GM_map01_mni.nii', 'mask01_mni.nii');
+%[a02, f02] = myGetTotals_Mean('GM_map02_mni.nii', 'mask02_mni.nii');
 
 
 % check spm version:
@@ -48,9 +45,11 @@ msk = msk ~= 0;
 vols = spm_vol(files);
 N = length(vols);
 
-t = zeros(N,1);
+f=files;
+
+a = zeros(N,1);
 for n = 1:N
     img = spm_read_vols(vols(n));
     img = img .* msk;    
-    t(n) = sum(img(img > 0))/size(find(img > 0),1);
+    a(n) = sum(img(img > 0))/size(find(img > 0),1);
 end
