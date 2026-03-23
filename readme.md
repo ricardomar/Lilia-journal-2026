@@ -10,5 +10,5 @@ The masking process assumes that the `msk` matches the voxel dimensions of each 
 
 ## Example Usage
 ```matlab
-[a01, file01] = myGetTotals_Mean('GM_map01_mni.nii', 'mask01_mni.nii');
-[a02, file02] = myGetTotals_Mean('GM_map02_mni.nii', 'mask02_mni.nii');
+[a01, f01] = myGetTotals_Mean('GM_map01_mni.nii', 'mask01_mni.nii');
+[a02, f02] = myGetTotals_Mean('GM_map02_mni.nii', 'mask02_mni.nii');
